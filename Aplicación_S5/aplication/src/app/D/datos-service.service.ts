@@ -12,10 +12,10 @@ export class DatosService {
   infoGraficas(form:any):Observable<any> {
     return this.info.post("http://localhost:8000/AppAPI/grafica/",form);
   }
-  AñadirTras(form:any):Observable<any> {
+  AnadirTras(form:any):Observable<any> {
     return this.info.post("http://localhost:8000/AppAPI/traslados/",form);
   }
-  AñadirAmb(form:any):Observable<any> {
+  AnadirAmb(form:any):Observable<any> {
     return this.info.post("http://localhost:8000/AppAPI/ambulance/",form);
   }
   ListadoTras(form:any):Observable<any> {

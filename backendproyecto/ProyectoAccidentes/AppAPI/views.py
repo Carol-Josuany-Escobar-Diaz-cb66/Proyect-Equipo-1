@@ -8,10 +8,10 @@ import json
 class UsuarioView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs) 
-    
+        return super().dispatch(request, *args, **kwargs)
     def post(self, request):
         usr = json.loads(request.body)
+#Mostrar Usuario
         if usr['tipo']=="datosUsuarios":
             print("Resultado Usuarios")
             datos = list(Usuario.objects.values())
@@ -46,49 +46,49 @@ class UsuarioView(View):
                 "Telefono": listTelefono,
                 "Usuario": listUsuario,
                 "Contrasena":listContrasena
-            }    
+            }
             print (dato)
             return JsonResponse(dato)
-        
-#Ingresar datos:
+#Ingresar Usuario
         if usr['tipo'] == "registroUsuarios":
             jd = json.loads(request.body)
             Usuario.objects.create(NombreUsuario=jd['NombreUsuario'],ApellidoUsuario=jd['ApellidoUsuario'],
                                FechaNacimiento=jd['FechaNacimiento'],Direccion=jd['Direccion'],Telefono=jd['Telefono'],
                                Usuario=jd['Usuario'],Contrasena=jd['Contrasena'])
-            return JsonResponse({'message':'Dato Registrado'})
-    
-    def put(self,request,id):
-        jd=json.loads(request.body)
-        usuarios=list(Usuario.objects.filter(id=id).values())
-        if len(usuarios) > 0:
-            usuario=Usuario.objects.get(id=id)
-            usuario.NombreUsuario=jd['NombreUsuario']
-            usuario.ApellidoUsuario=jd['ApellidoUsuario']
-            usuario.FechaNacimiento=jd['FechaNacimiento']
-            usuario.Direccion=jd['Direccion']
-            usuario.Telefono=jd['Telefono']
-            usuario.Usuario=jd['Usuario']
-            usuario.Contrasena=jd['Contrasena']
-            usuario.save()
-            datos = {'message': "Success"}
-        else:  
-            datos={'message':"User not found..."}
-        return JsonResponse(datos)
-    
-    def delete(self,request,id):
-        usuarios=list(Usuario.objects.filter(id=id).values())
-        if len(usuarios) > 0:
-            Usuario.objects.filter(id=id).delete()
-            datos = {'message': "Success"}
-        else:
-            datos={'message':"User not found..."}
-        return JsonResponse(datos)
- 
+            return JsonResponse({'message':'Usuario Registrado'})
+#Actualizar Usuario
+        if usr['tipo'] == "actualizarUsuario":
+            jd = json.loads(request.body)
+            ActUser=(Usuario.objects.filter(NombreUsuario=jd['NombreUsuario']).values())
+            if len(ActUser) > 0:
+                UsersAct=Usuario.objects.get(NombreUsuario=jd['NombreUsuario'])
+                UsersAct.ApellidoUsuario = jd['ApellidoUsuario']
+                UsersAct.FechaNacimiento = jd['FechaNacimiento']
+                UsersAct.Direccion = jd['Direccion']
+                UsersAct.Telefono = jd['Telefono']
+                UsersAct.Usuario = jd['Usuario']
+                UsersAct.Contrasena = jd['Contrasena']
+                UsersAct.save()
+                dato={'message':"Usuario actualizado correctamente"}
+            return JsonResponse(dato)
+#Eliminar Usuario
+        if usr['tipo'] == "borrarUsuario":
+            jd = json.loads(request.body)
+            ActUser=(Usuario.objects.filter(NombreUsuario=jd['NombreUsuario']).values())
+            if len (ActUser) > 0:
+                UserEli=Usuario.objects.get(NombreUsuario=jd['NombreUsuario'])
+                UserEli.delete()
+                dato = {'message':"Usuario eliminado"}
+            return JsonResponse(dato)
+        
+        
+#---------------------------------------------------------------------------------------------------------------------
+#GRAFICA
 class GraficaView(View):
+    #Mostrar datos en la gráfica:
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs) 
+        return super().dispatch(request, *args, **kwargs)
     def post(self, request):
         tras = json.loads(request.body)
         if tras['tipo'] == 'infoGraficas':
@@ -99,7 +99,6 @@ class GraficaView(View):
             print(RegistrosAmbulancias)
             # for reg in RegistrosAmbulancias:
             #     print(reg.TipoHerida + ' ' + str(reg.Cantidad))
-            
             DatosTraslados=[]
             DatosAmbulancias = []
             for RegistroD in RegistrosTraslados:
@@ -113,128 +112,114 @@ class GraficaView(View):
                                     {
                                  'name': "Ambulancias",
                                  'series': DatosAmbulancias
-                                 }  
+                                 }
                                      ]
                     }
-           
             return JsonResponse(tras)
         
         
-    
-    
-
+#----------------------------------------------------------------------------------------------------------------------
+#TRASLADOS:
 class TrasladosView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs) 
+        return super().dispatch(request, *args, **kwargs)
     def post(self, request):
-        tras = json.loads(request.body)
-        if (tras['tipo'] == 'agTraslados'):
-            Mes = tras['Mes']
-            Cantidad = tras['Cantidad']
-            Traslados.objects.create(Mes=tras['Mes'],Cantidad=tras['Cantidad'])
-            return JsonResponse({'message':'Dato registrado correctamente'})
-        
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-"""#Mostrar datos:
-    def post(self, request):
-        tras = json.loads(request.body)
-        
-        if tras['tipo']=="DatosTraslados":
-            print("Resultado Traslados")
-            datos = list(Traslados.objects.values())
-            listmes = []
-            listcantidad = []
-            for traslate in datos:
-                for campo, valor in traslate.items():
-                    if campo == "Mes":
-                        listmes.append(valor)
-                    if campo == "Cantidad":
-                       listcantidad.append(valor)
-            dato={
-                "Mes": listmes,
-                "Cantidad": listcantidad
-            }    
-            print(dato)
-            return JsonResponse(dato)
-#Ingresar datos:
-        if tras['tipo'] == "agregarTraslados":
-            jd = json.loads(request.body)
-            Traslados.objects.create(Mes=jd['Mes'],Cantidad=jd['Cantidad'])
-            return JsonResponse({'message':'Dato Registrado'})
-        
-#Actualizar datos:
+    #Mostrar datos de Traslados
+        if tras['tipo'] == 'datosTraslados':
+            RegistrosTraslados = list(Traslados.objects.values())
+            DatosTraslados=[]
+            for RegistroD in RegistrosTraslados:
+                DatosTraslados.append({'name':(RegistroD['Mes']),'value':(RegistroD['Cantidad'])})
+            tras = {'datosTraslados':[{
+                                 'name': "Traslados",
+                                 'series': DatosTraslados
+                                 }
+                                     ]
+                    }
+            return JsonResponse(tras)
+#Actualizar datos de Traslados:
         if tras['tipo'] == "actualizarTraslados":
             jd = json.loads(request.body)
             ActDatos=(Traslados.objects.filter(Mes=jd['Mes']).values())
             if len(ActDatos) > 0:
-                TrasladosAct=TrasladosAct.objects.get(Mes=jd['Mes'])
+                TrasladosAct=Traslados.objects.get(Mes=jd['Mes'])
                 TrasladosAct.Mes = jd['Mes']
                 TrasladosAct.Cantidad = jd['Cantidad']
                 TrasladosAct.save()
-                dato={'message':"Datos editados"}
+                dato={'message':"Registro actualizado correctamente"}
             return JsonResponse(dato)
-#Eliminar datos:   
+#Eliminar datos de Traslados:
         if tras['tipo'] == "borrarTraslados":
             jd = json.loads(request.body)
             ActDatos=(Traslados.objects.filter(Mes=jd['Mes']).values())
             if len (ActDatos) > 0:
-                TrasladosAct=TrasladosAct.objects.get(Mes=jd['Mes'])
-                TrasladosAct.delete()
-                dato = {'message':"Dato eliminado"}
-            return JsonResponse(dato)"""
-            
-            
+                TrasladosEli=Traslados.objects.get(Mes=jd['Mes'])
+                TrasladosEli.delete()
+                dato = {'message':"Registro eliminado"}
+            return JsonResponse(dato)
+        
+#Listar datos
+        if tras['tipo'] == "ListadoTraslados":
+            Cantidad = list(Traslados.objects.values().order_by('Mes'))
+            lista = {"lista":Cantidad}
+            return JsonResponse(lista)
+#Registrar datos 
+        if (tras['tipo'] == 'registroTraslados'):
+            jd = json.loads(request.body)
+            Traslados.objects.create(Mes=tras['Mes'],Cantidad=tras['Cantidad'])
+            return JsonResponse({'message':'Dato registrado correctamente'})
+        
+        
+#-------------------------------------------------------------------------------------------------------------------------
+#AMBULANCIAS
 class AmbulanciasView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs) 
-#Mostrar dato:
+        return super().dispatch(request, *args, **kwargs)
     def post(self, request):
+#Mostrar datos de Ambulancias
         amb = json.loads(request.body)
-        if amb['tipo']=="datosAmbulancias":
-            print("Resultado Ambulancias")
-            datos = list(Traslados.objects.values())
-            listIdentificacion = []
-            listTipoHerida = []
-            listCantidadH = []
-            
-            for ambulance in datos:
-                for campo, valor in ambulance.items():
-                    if campo == "Identificacion":
-                        listIdentificacion.append(valor)
-                    if campo == "TipoHerida":
-                       listTipoHerida.append(valor)
-                    if campo == "CantidadH":
-                        listCantidadH.append(valor)
-            dato={
-                "Identificacion": listIdentificacion,
-                "TipoHerida": listTipoHerida,
-                "CantidadH": listCantidadH
-            }    
-            print (dato)
-            return JsonResponse(dato)
-#Ingresar datos:
-        if amb['tipo'] == "registroAmbulancias":
+        if amb['tipo'] == 'datosAmbulancias':
+            RegistrosAmbulancias = (Ambulancias.objects.raw('select id, TipoHerida, sum(CantidadH) as Cantidad from appapi_ambulancias group by TipoHerida'))
+            print(RegistrosAmbulancias)
+            DatosAmbulancias = []
+            for RegAmb in RegistrosAmbulancias:
+                DatosAmbulancias.append({'name':RegAmb.TipoHerida,'value':RegAmb.Cantidad})
+            amb = {'datosAmbulancias':[{
+                                 'name': "Ambulancias",
+                                 'series': DatosAmbulancias
+                                 }
+                                     ]
+                    }
+            return JsonResponse(amb)
+#Actualizar datos de Ambulancias
+        if amb['tipo'] == "actualizarAmbulancias":
             jd = json.loads(request.body)
-            Ambulancias.objects.create(Identificacion=jd['Identificacion'],TipoHerida=jd['TipoHerida'],CantidadH=jd['CantidadH'])
-            return JsonResponse({'message':'Dato Registrado'})
-        
+            ActDatosAmb=(Ambulancias.objects.filter(TipoHerida=jd['TipoHerida']).values())
+            if len(ActDatosAmb) > 0:
+                AmbulanciasAct=Ambulancias.objects.get(TipoHerida=jd['TipoHerida'])
+                AmbulanciasAct.TipoHerida = jd['TipoHerida']
+                AmbulanciasAct.CantidadH = jd['CantidadH']
+                AmbulanciasAct.save()
+                dato={'message':"Datos modificados correctamente"}
+            return JsonResponse(dato)
+#Eliminar datos de Ambulancias
+        if amb['tipo'] == "borrarAmbulancias":
+            jd = json.loads(request.body)
+            ActDatosAmb=(Ambulancias.objects.filter(TipoHerida=jd['TipoHerida']).values())
+            if len (ActDatosAmb) > 0:
+                AmbulanciasEli=Ambulancias.objects.get(TipoHerida=jd['TipoHerida'])
+                AmbulanciasEli.delete()
+                dato = {'message':"Registro eliminado"}
+            return JsonResponse(dato)
+#Listar datos
+        if amb['tipo'] == "ListadoAmbulancias":
+            CantidadH = list(Ambulancias.objects.values().order_by('TipoHerida'))
+            lista = {"lista":CantidadH}
+            return JsonResponse(lista)
+#Registrar datos 
+        if (amb['tipo'] == 'registroAmbulancias'):
+            jd = json.loads(request.body)
+            Ambulancias.objects.create(TipoHerida=amb['TipoHerida'],CantidadH=amb['CantidadH'])
+            return JsonResponse({'message':'Dato registrado correctamente'})

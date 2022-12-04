@@ -12,7 +12,8 @@ import { BlogComponent } from './B/blog/blog.component';
 import { LoginComponent } from './L/login/login.component';
 import { PerfilComponent } from './P/perfil/perfil.component';
 import { FuncionComponent } from './D/funcion/funcion.component';
-
+import { ToastrModule } from 'ngx-toastr/public_api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { FuncionComponent } from './D/funcion/funcion.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
