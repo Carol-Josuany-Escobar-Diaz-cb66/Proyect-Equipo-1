@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Chart, ChartConfiguration} from 'chart.js';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { DatosService } from '../datos-service.service';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-datos',
@@ -36,7 +36,7 @@ ActualizarAmb:boolean = false;
 
 
 
-  constructor(private infoGraficas:DatosService, private toastr:ToastrService){
+  constructor(private infoGraficas:DatosService){
   }
 
 //------------------------------------------TRASLADOS------------------------------------------//
@@ -78,7 +78,7 @@ ActualizarAmb:boolean = false;
     }
     this.infoGraficas.EliminarTras(form).subscribe((res)=> {
       if(res.message=='Registro eliminado'){
-        this.toastr.warning('Registro eliminado');
+        alert('Registro eliminado');
       }
     })
   }
@@ -99,13 +99,13 @@ AgregarAmb(){
     this.DatosAmbulancias['tipo']= 'registroAmbulancias';
     this.infoGraficas.AnadirAmb(this.RegistroA).subscribe((res)=> {
       if(res.message=='Dato registrado correctamente'){
-        this.toastr.success('Registrado')
+        alert('Registrado')
       } else {
-        this.toastr.warning('No hay registros')
+        alert('No hay registros')
       }
     })
   } else {
-    this.toastr.error('Los campos estan vacios')
+    alert('Los campos estan vacios')
   }
 }
 
@@ -114,14 +114,14 @@ UpdateAmb(visible:boolean){
     this.DatosAmbulancias['tipo']= 'actualizarAmbulancias';
     this.infoGraficas.ActuaTras(this.RegistroA).subscribe((res)=> {
       if(res.message=='Datos modificados correctamente'){
-        this.toastr.success('Actualizar datos')
+        alert('Actualizar datos')
       } else {
-        this.toastr.warning('No esta actualizado correctamente')
+        alert('No esta actualizado correctamente')
       }
     })
   }
   else {
-    this.toastr.error('No hay datos para actualizar','Faltan datos',{timeOut:2000})
+    alert('No hay datos para actualizar','Faltan datos',{timeOut:2000})
   }
 }
 
@@ -132,7 +132,7 @@ DelAmb(TipoHerida:string){
   }
   this.infoGraficas.EliminarAmb(form).subscribe((res)=> {
     if(res.message=='Registro eliminado'){
-      this.toastr.warning('Registro eliminado');
+     alert('Registro eliminado');
     }
   })
 }
