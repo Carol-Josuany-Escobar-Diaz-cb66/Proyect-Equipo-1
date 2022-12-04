@@ -1,104 +1,111 @@
-<br>
-<br>
-
-  <!-- Gráfica -->
-    <ngx-charts-area-chart-stacked
-    [view]="view"
-    [legend]="legend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxis]="xAxis"
-    [yAxis]="yAxis"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [timeline]="timeline"
-    [results]="multi"
-    (select)="onSelect($event)">
-    </ngx-charts-area-chart-stacked>
-
-<!-- Tabla de registros -->
-<div class="row pt-2">
-  <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Mes</th>
-            <th scope="col">Cantidad</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr *ngFor="let tras of RegistroD">
-            <td>{{tras.Mes}}</td>
-            <td>{{tras.Cantidad}}</td>
-            <td> <a class="btn" (click)="Editar(tras.Mes,tras.Cantidad)">
-              <i class="" aria-hidden="true"></i></a> |
-              <a class="btn" (click)="DelTras(tras.Mes)">Eliminar</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
-</div>
-
-<!-- Formulario -->
 <div class="card">
+  <div class="card-header">
+    Graficas y Datos
+  </div>
   <div class="card-body">
-    <div class="col">
-      <h3>Información de Traslados</h3>
-      <div class="form-group">
-        <label for="">Mes:</label>
-        <input [(ngModel)]="DatosTraslados.Mes" type="text" class="form-control" id="" placeholder="Mes">
-      </div>
-      <br>
-      <div class="form-group">
-        <label for="">Cantidad:</label>
-        <input [(ngModel)]="DatosTraslados.Cantidad" type="" class="form-control" id="" placeholder="Cantidad">
-      </div>
-      <br>
+    <div class="row">
+      <!-- Gráfica -->
+      <ngx-charts-area-chart-stacked [view]="view" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel" [timeline]="timeline" [results]="multi" (select)="onSelect($event)">
+      </ngx-charts-area-chart-stacked>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Formulario Traslados-->
+        <div class="card">
+          <div class="card-body">
+            <div class="col">
+              <h3>Información de Traslados</h3>
+              <div class="form-group">
+                <label for="">Mes:</label>
+                <input [(ngModel)]="DatosTraslados.Mes" type="text" class="form-control" id="" placeholder="Mes">
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="">Cantidad:</label>
+                <input [(ngModel)]="DatosTraslados.Cantidad" type="" class="form-control" id="" placeholder="Cantidad">
+              </div>
+              <br>
 
-      <div *ngIf="AddTraslado">
-        <button type="button" class="btn btn-outline px-2" (click)="AgregarTras()">Agregar Datos</button>
-      </div>
-      <div class="d-flex d-inline ps-4">
-            <div *ngIf="ActualizarTras" class="px-4">
-              <button type="button" class="btn btn-outline px-2" (click)="UpdateTras(true)">Actualizar
-                Datos</button>
+              <div *ngIf="AddTraslado">
+                <button type="button" class="btn btn-outline px-2" (click)="AgregarTras()">Agregar Datos</button>
+              </div>
+              <div class="d-flex d-inline ps-4">
+                <div *ngIf="ActualizarTras" class="px-4">
+                  <button type="button" class="btn btn-outline px-2" (click)="UpdateTras(true)">Actualizar
+                    Datos</button>
+                </div>
+                <div *ngIf="ActualizarTras">
+                  <button type="button" class="btn btn-outline px-2" (click)="UpdateTras(false)">Cancelar</button>
+                </div>
+              </div>
             </div>
-        <div *ngIf="ActualizarTras">
-            <button type="button" class="btn btn-outline px-2" (click)="UpdateTras(false)">Cancelar</button>
+          </div>
         </div>
+        <!-- Tabla de registros de -->
+        <div class="row pt-2">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Mes</th>
+                  <th scope="col">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let tras of RegistroD">
+                  <td>{{tras.Mes}}</td>
+                  <td>{{tras.Cantidad}}</td>
+                  <td> <a class="btn" (click)="Editar(tras.Mes,tras.Cantidad)">
+                      <i class="" aria-hidden="true"></i></a> |
+                    <a class="btn" (click)="DelTras(tras.Mes)">Eliminar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- formulario de ambulancias -->
+        <div class="card">
+          <div class="card-body">
+            <div class="col">
+              <h3>Información de Ambulancias y tipo de herida</h3>
+              <div class="form-group">
+                <label for="">Identificación:</label>
+                <input [(ngModel)]="DatosAmbulancias.Identificacion" type="text" class="form-control" id=""
+                  placeholder="Identificacion">
+              </div> <br>
+              <div class="form-group">
+                <label for="">Tipo de herida:</label>
+                <input [(ngModel)]="DatosAmbulancias.TipoHerida" type="text" class="form-control" id=""
+                  placeholder="Tipo de herida">
+              </div> <br>
+              <div class="form-group">
+                <label for="">Número de heridos:</label>
+                <input [(ngModel)]="DatosAmbulancias.CantidadH" type="" class="form-control" id=""
+                  placeholder="Número de heridos:">
+              </div> <br>
+              <div *ngIf="AddAmbulancias">
+                <button type="button" class="btn btn-outline px-2" (click)="AgregarAmb()">Agregar Datos</button>
+              </div>
+              <div class="d-flex d-inline ps-4">
+                <div *ngIf="ActualizarAmb" class="px-4">
+                  <button type="button" class="btn btn-outline px-2" (click)="UpdateAmb(true)">Actualizar
+                    Datos</button>
+                </div>
+                <div *ngIf="ActualizarAmb">
+                  <button type="button" class="btn btn-outline px-2" (click)="UpdateAmb(false)">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      Footer
     </div>
   </div>
-</div>
-    <br>
-<div class="card">
-  <div class="card-body">
-    <div class="col">
-      <h3>Información de Ambulancias y tipo de herida</h3>
-      <div class="form-group">
-        <label for="">Identificación:</label>
-        <input [(ngModel)]="DatosAmbulancias.Identificacion" type="text" class="form-control" id="" placeholder="Identificacion">
-      </div>  <br>
-      <div class="form-group">
-        <label for="">Tipo de herida:</label>
-        <input [(ngModel)]="DatosAmbulancias.TipoHerida" type="text" class="form-control" id="" placeholder="Tipo de herida">
-      </div>  <br>
-      <div class="form-group">
-        <label for="">Número de heridos:</label>
-        <input [(ngModel)]="DatosAmbulancias.CantidadH" type="" class="form-control" id="" placeholder="Número de heridos:">
-      </div>  <br>
-      <div *ngIf="AddAmbulancias">
-        <button type="button" class="btn btn-outline px-2" (click)="AgregarAmb()">Agregar Datos</button>
-      </div>
-      <div class="d-flex d-inline ps-4">
-            <div *ngIf="ActualizarAmb" class="px-4">
-              <button type="button" class="btn btn-outline px-2" (click)="UpdateAmb(true)">Actualizar
-                Datos</button>
-            </div>
-        <div *ngIf="ActualizarAmb">
-            <button type="button" class="btn btn-outline px-2" (click)="UpdateAmb(false)">Cancelar</button>
-        </div>
-    </div>
-   </div>
-  </div>
-</div>

@@ -121,7 +121,7 @@ UpdateAmb(visible:boolean){
     })
   }
   else {
-    alert('No hay datos para actualizar','Faltan datos',{timeOut:2000})
+    alert('No hay datos para actualizar')
   }
 }
 
