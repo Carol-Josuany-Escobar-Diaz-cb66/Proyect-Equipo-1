@@ -103,6 +103,33 @@
             </div>
           </div>
         </div>
+        <!-- Tabla de registros de Ambulancias-->
+        <div class="row pt-2">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Herida</th>
+                  <th scope="col">Identificacion</th>
+                  <th scope="col">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let amb of RegistroA">
+                  <tbody>{{amb.id}}</tbody>
+                  <td>{{amb.TipoHerida}}</td>
+                  <td>{{amb.Identificacion}}</td>
+                  <td>{{amb.CantidadH}}</td>
+                  <td> <a class="btn" (click)="EditarAmb(amb.TipoHerida,amb.Identificacion,amb.CantidadH)">
+                      <i class="" aria-hidden="true"></i></a> |
+                    <a class="btn" (click)="DelAmb(amb.id)">Eliminar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card-footer text-muted">

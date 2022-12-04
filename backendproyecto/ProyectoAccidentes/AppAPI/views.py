@@ -13,7 +13,7 @@ class UsuarioView(View):
         usr = json.loads(request.body)
 #Mostrar Usuario
         if usr['tipo']=="datosUsuarios":
-            print("Resultado Usuarios")
+             
             datos = list(Usuario.objects.values())
             listNombreUsuario = []
             listApellidoUsuario = []
@@ -82,7 +82,7 @@ class UsuarioView(View):
             return JsonResponse(dato)
         
         
-#---------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------
 #GRAFICA
 class GraficaView(View):
     #Mostrar datos en la gráfica:
@@ -115,16 +115,22 @@ class GraficaView(View):
                                  }
                                      ]
                     }
+            print(tras)
             return JsonResponse(tras)
+        
         
         
 #----------------------------------------------------------------------------------------------------------------------
 #TRASLADOS:
 class TrasladosView(View):
+    
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
     def post(self, request):
+        tras = json.loads(request.body)
+        
     #Mostrar datos de Traslados
         if tras['tipo'] == 'datosTraslados':
             RegistrosTraslados = list(Traslados.objects.values())
@@ -182,7 +188,7 @@ class AmbulanciasView(View):
         amb = json.loads(request.body)
         if amb['tipo'] == 'datosAmbulancias':
             RegistrosAmbulancias = (Ambulancias.objects.raw('select id, TipoHerida, sum(CantidadH) as Cantidad from appapi_ambulancias group by TipoHerida'))
-            print(RegistrosAmbulancias)
+             
             DatosAmbulancias = []
             for RegAmb in RegistrosAmbulancias:
                 DatosAmbulancias.append({'name':RegAmb.TipoHerida,'value':RegAmb.Cantidad})
@@ -221,5 +227,6 @@ class AmbulanciasView(View):
 #Registrar datos 
         if (amb['tipo'] == 'registroAmbulancias'):
             jd = json.loads(request.body)
-            Ambulancias.objects.create(TipoHerida=amb['TipoHerida'],CantidadH=amb['CantidadH'])
+            Ambulancias.objects.create(Identificacion= amb['Identificacion'],TipoHerida=amb['TipoHerida'],CantidadH=amb['CantidadH'])
             return JsonResponse({'message':'Dato registrado correctamente'})
+        return JsonResponse({"mensaje":"nu hubo coincidencias de TIPO"})
