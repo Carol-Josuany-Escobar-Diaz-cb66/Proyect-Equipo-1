@@ -1,0 +1,7 @@
+img{
+  float: center;
+  max-height: 370px;
+  max-width: 400;
+  border-radius: 5px;
+  border: 50%;
+}

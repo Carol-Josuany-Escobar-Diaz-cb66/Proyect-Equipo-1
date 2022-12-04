@@ -1,0 +1,17 @@
+*{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar{
+  background: rgb(16, 13, 197);
+  background-color: rgb(16, 13, 197); ;
+}
+.navbar a{
+  color: white;
+  text-align: center;
+}
+button{
+  color: white;
+  text-align: center;
+  border-color: white;
+}

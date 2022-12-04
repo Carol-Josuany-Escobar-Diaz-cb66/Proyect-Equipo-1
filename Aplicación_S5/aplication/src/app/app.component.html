@@ -1,0 +1,51 @@
+
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Encabezado -->
+  <header>
+    <div class="col-lg-2">
+      <div class="header__logo">
+          <a href="">
+              <img src="" alt="">
+          </a>
+      </div>
+    </div>
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="Inicio" aria-current="page">InfoAccidentes</a>
+          <button class="navbar-toggler hidden-lg-up" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+              aria-expanded="false" aria-label="Toggle navigation"></button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="Inicio">Inicio</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="Login">Login</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="Datos">Datos</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="Blog">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="Perfil">Perfil</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container pt-4">
+      <router-outlet></router-outlet>
+    </div>
+  </header>
+</body>

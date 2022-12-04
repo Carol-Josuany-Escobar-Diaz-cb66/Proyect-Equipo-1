@@ -1,0 +1,38 @@
+
+<br>
+<div class="card mb-3" >
+  <br>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="assets/img/recent-6.jpg">
+    </div>
+
+    <div class="col-md-8">
+      <div class="card-header"> Inicio de sesion: </div>
+        <div class="card-body">
+        <div class="mb-3">
+      <div class="form-floating mb-3">
+        <input  [(ngModel)]="user.NombreUsuario" type="text" name="" id="1" class="form-control" placeholder="">
+        <label for="formId1">Usuario</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input  [(ngModel)]="user.Usuario" type="email" name="" id="2" class="form-control" placeholder="">
+        <label for="formId1">Email</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input  [(ngModel)]="user.Contrasena" type="password" name="" id="3" class="form-control" placeholder="">
+      <label for="formId1">Password</label>
+      </div>
+      <div class="form-check mb-3">
+      <input type="checkbox" name="connected" id="" class="form-check-input" placeholder="">
+      <label for="formId1" class="form-check-label">Mantenerme conectado</label>
+      </div>
+      <div class="d-grid gap-2">
+        <button type="button" name="" id="" class="btn btn-secondary" (click)=login()>Ingresar</button>
+      </div>
+      <div class="my-4">
+        No tienes cuenta? <a href="Perfil">Registrate</a><br>
+      </div>
+    </div>
+  </div>
+</div>

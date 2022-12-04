@@ -1,0 +1,35 @@
+<br>
+<h1 class="text-center">Registro de usuario</h1>
+<div class="signup">
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.nombre" type="text" name="" id="" class="form-control" placeholder="">
+    <label for="formId1">Nombre</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.apellido" type="text" name="" id="" class="form-control" placeholder="">
+    <label for="formId1">Apellido</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.fechanacimiento" type="text" name="" id="" class="form-control" placeholder="">
+    <label for="formId1">Fecha de nacimiento</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.direccion" type="text" name="" id="" class="form-control" placeholder="">
+    <label for="formId1">Direccion</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.telefono" type="email" name="" id="" class="form-control" placeholder="">
+    <label for="formId1">Telefono</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.usuario" type="email" name="" id="" class="form-control" placeholder="">
+    <label for="formId1">Usuario</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input  [(ngModel)]="sign.contrasena" type="password" name="" id="" class="form-control" placeholder="">
+  <label for="formId1">Contrasena</label>
+  </div>
+  <div class="d-grid gap-2">
+    <button type="button" name="" id="" class="btn btn-secondary" (click)= signup()>Registrar</button>
+  </div>
+</div>
