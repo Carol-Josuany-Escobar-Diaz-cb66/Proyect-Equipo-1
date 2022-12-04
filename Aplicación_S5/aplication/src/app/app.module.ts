@@ -12,7 +12,7 @@ import { BlogComponent } from './B/blog/blog.component';
 import { LoginComponent } from './L/login/login.component';
 import { PerfilComponent } from './P/perfil/perfil.component';
 import { FuncionComponent } from './D/funcion/funcion.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 
 
@@ -31,7 +31,7 @@ import { FuncionComponent } from './D/funcion/funcion.component';
     FormsModule,
     HttpClientModule,
     NgxChartsModule,
- 
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
