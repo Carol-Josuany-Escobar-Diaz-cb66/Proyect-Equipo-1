@@ -1,23 +1,82 @@
-<div class="container">
-  <br>
-  <h1>Gráfica de traslados</h1>
-  <hr>
-  <canvas baseChart width="10" height="10"
-  [data]="lineChartData"
-  [options]="lineChartOptions"
-  [type]="lineChartType"
-  (chartHover)="chartHovered($event)"
-  (chartClick)="chartClicked($event)"></canvas>
-<table>
-  <tr>
-    <th *ngFor="let label of lineChartData.labels">{{label}}</th>
-  </tr>
-  <tr *ngFor="let d of lineChartData.datasets; let i=index" [class]="'line-'+i">
-    <td *ngFor="let label of lineChartData.labels; let j=index">{{d && d.data[j]}}</td>
-  </tr>
-</table>
-<div class="button-row">
-  <button mat-button mat-raised-button color="primary" (click)="randomize()">Randomize</button>
-  <button mat-button mat-raised-button color="primary" (click)="hideOne()">Toggle Series B</button>
+<br>
+<br>
+
+  <!-- Gráfica -->
+    <ngx-charts-area-chart-stacked
+    [view]="view"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="multi"
+    (select)="onSelect($event)">
+    </ngx-charts-area-chart-stacked>
+
+<!-- Tabla de registros -->
+<div class="row pt-2">
+  <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mes</th>
+            <th scope="col">Cantidad</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let tras of RegistroD">
+            <td>{{tras.Mes}}</td>
+            <td>{{tras.Cantidad}}</td>
+            <td> <a class="btn" (click)="ActuaTras(tras.Mes,tras.Cantidad)">
+              <i class="" aria-hidden="true"></i></a> |
+              <a class="btn" (click)="EliminarTras(tras.Mes)">Eliminar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
 </div>
+
+<!-- Formulario -->
+<div class="card">
+  <div class="card-body">
+    <div class="col">
+      <h3>Información de Traslados</h3>
+      <div class="form-group">
+        <label for="">Mes:</label>
+        <input type="" class="form-control" id="" placeholder="Mes">
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="">Cantidad:</label>
+        <input type="" class="form-control" id="" placeholder="Cantidad">
+      </div>
+      <br>
+      <div class="d-grid gap-2">
+        <button type="button" name="" id="" class="btn btn-primary">Agregar información</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <br>
+<div class="card">
+  <div class="card-body">
+    <div class="col">
+      <h3>Información de Traslados</h3>
+      <div class="form-group">
+        <label for="">Tipo de herida:</label>
+        <input type="" class="form-control" id="" placeholder="Tipo de herida">
+      </div>  <br>
+      <div class="form-group">
+        <label for="">Número de heridos:</label>
+        <input type="" class="form-control" id="" placeholder="Número de heridos:">
+      </div>  <br>
+      <div class="d-grid gap-2">
+        <button type="button" name="" id="" class="btn btn-primary">Agregar información</button>
+      </div>
+   </div>
+  </div>
 </div>

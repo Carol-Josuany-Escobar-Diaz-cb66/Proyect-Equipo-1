@@ -1,0 +1,43 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Integrales</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Integrales</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="otro.css" type="text/css" />
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+  <script>
+    MathJax.Hub.Config({
+      tex2jax:{
+        preview:"none"
+      }
+    });
+  </script>
+</head>
+<div class="card border-primary">
+  <div class="card-body">
+      <header>
+        <h3>Explicación de la grafica con cálculo integral</h3>
+      </header>
+    </div>
+    <p>En la siguiente grafica se representa la función f(x)= 0.3x^(3) - 5.9x^(2) + 29.6x + 126.8</p>
+    <div id="box" class="jxbox" style="width: 400px; height: 400px;"></div>
+    <script type="text/javascript">
+      function pinta_int_parabola(){
+        var board = JSXGraph.initBoard('box',{boundingbox:[-5, 9, 5, -1], axis:true, showCopyright:false, showNavigation:false});
+        var curve = board.create('functiongraph',[function(t){ return(t*t)}, -10,10]);
+        var i1 = board.create('integral', [[1.0, 2.0], curve], {withLabel:false});
+        var t_int = board.create('text',[-4,-.8, function(){return 'Area='+i1.Value().toFixed(3)}],{fontSize:16, fixed:true})
+      }
+    pinta_int_parabola()
+    </script>
+  </div>

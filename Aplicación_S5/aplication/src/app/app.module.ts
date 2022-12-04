@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NgChartsModule } from 'ng2-charts';
-
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +11,7 @@ import { InicioComponent } from './I/inicio/inicio.component';
 import { BlogComponent } from './B/blog/blog.component';
 import { LoginComponent } from './L/login/login.component';
 import { PerfilComponent } from './P/perfil/perfil.component';
+import { FuncionComponent } from './D/funcion/funcion.component';
 
 
 @NgModule({
@@ -21,14 +21,15 @@ import { PerfilComponent } from './P/perfil/perfil.component';
     InicioComponent,
     BlogComponent,
     LoginComponent,
-    PerfilComponent
+    PerfilComponent,
+    FuncionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgChartsModule
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

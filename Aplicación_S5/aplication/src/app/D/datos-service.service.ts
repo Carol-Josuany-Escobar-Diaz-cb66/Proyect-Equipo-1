@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RouterState } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,9 +7,33 @@ import { Observable } from 'rxjs';
 })
 export class DatosService {
   HTTP = 'http://localhost:8000'
-  constructor(private rutas:HttpClient) { }
+  constructor(private info:HttpClient) { }
 
-  obtenerDatos(form:any):Observable<any> {
-    return this.rutas.post("http://localhost:8000",form);
+  infoGraficas(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/grafica/",form);
+  }
+  AñadirTras(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/traslados/",form);
+  }
+  AñadirAmb(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/ambulance/",form);
+  }
+  ListadoTras(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/traslados/",form);
+  }
+  ListadoAmb(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/ambulance/",form);
+  }
+  ActuaTras(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/traslados/",form);
+  }
+  ActuaAmb(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/ambulance/",form);
+  }
+  EliminarTras(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/traslados/",form);
+  }
+  EliminarAmb(form:any):Observable<any> {
+    return this.info.post("http://localhost:8000/AppAPI/ambulance/",form);
   }
 }
